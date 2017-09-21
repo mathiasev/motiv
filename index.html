@@ -138,11 +138,12 @@ background-color: rgb(255, 255, 255);
   <div class="card-user-profile-content card-section">
      <p class="card-user-profile-name"><input id="ProjectTitle" type="text" placeholder="Project Title"></p>
     <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
+    <p class="card-user-profile-status"><span id="RemainingWordCount"></span> words remaining</p>
     <p class="card-user-profile-info"><code>Chart</code></p>
   </div>
 
   <div class="card-user-profile-actions">
-    <input type="number" class="card-user-profile-button button hollow" placeholder="Required Words">
+    <input type="number" class="card-user-profile-button button hollow" placeholder="Required Words" id="RequiredWords">
    <!-- <a href="#" class="card-user-profile-button button hollow secondary">More Info</a>-->
   </div>
 </div>
@@ -169,13 +170,15 @@ background-color: rgb(255, 255, 255);
     var value = jQuery('#motiv').val();
 
     if (value.length == 0) {
-        $('#WordCount').html(0);
+        jQuery('#WordCount').html(0);
+        jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val());
         return;
     }
 
     var regex = /\s+/gi;
     var wordCount = value.trim().replace(regex, ' ').split(' ').length;
     jQuery('#WordCount').html(wordCount);
+    jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val()-wordCount);
 };
 
 jQuery(document).ready(function() {
