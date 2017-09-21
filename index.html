@@ -28,11 +28,11 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
         
-        h1 { color: #333333; font-family: 'Bitter', serif; font-size: 30px; font-weight: normal; line-height: 54px; margin: 0 0 54px; }
-        h2 { color: #333333; font-family: 'Bitter', serif; font-size: 25px; font-weight: normal; line-height: 48px; margin: 0 0 54px; }
+        h1 { color: #333333; font-family: 'Bitter', serif; font-size: 30px; font-weight: normal; line-height: 54px; margin: 0 0 25px; }
+        h2 { color: #333333; font-family: 'Bitter', serif; font-size: 25px; font-weight: normal; line-height: 48px; margin: 0 0 25px; }
 
 
-p { color: #333333; font-family: Georgia, serif; font-size: 18px; line-height: 28px; margin: 0 0 28px; }
+p { color: #333333; font-family: Georgia, serif; font-size: 18px; line-height: 28px; margin: 0 0 18px; }
 
 
 p:first-of-type { font-size: 20px; line-height: 30px; margin: 0 0 28px; }
@@ -155,7 +155,9 @@ a:hover { color: #333333; text-decoration: underline; }
      letter-spacing: 1px;
      opacity: 0.8;
     }
-
+.instructions, .instructions h1, .instructions h2, .instructions h3 {
+    color: #ffffff !important;
+}
      body {background-color:#4c4c4c;}
     #motiv, #preview {
      width: 100%;
@@ -187,6 +189,11 @@ a:hover { color: #333333; text-decoration: underline; }
                     <input class="card-user-profile-button button hollow input" id="RequiredWords" placeholder="Required Words" type="number"> <button class="card-user-profile-button button hollow secondary" id="CopyButton" onclick="CopyToClipboard('preview')">Copy all text</button>
                 </div>
             </div>
+            <div class="instructions">
+        <h1>#heading 1</h1>
+<h2>##heading 2</h2>
+<p>two<br>enters</p><p>for a new paragraph</p>
+        </div>
         </div>
         <div class="medium-8 columns">
             <div id="preview"></div>
