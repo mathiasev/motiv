@@ -199,7 +199,7 @@
               jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val() + "words remaining");
               return;
           }
-jQuery('#myChart').hide();
+jQuery('#myChart').show();
           var regex = /\s+/gi;
           var wordCount = value.trim().replace(regex, ' ').split(' ').length;
           jQuery('#WordCount').html(wordCount + " words");
