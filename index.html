@@ -147,7 +147,7 @@ background-color: rgb(255, 255, 255);
 
   <div class="card-user-profile-actions">
     <input type="number" class="card-user-profile-button button hollow" placeholder="Required Words" id="RequiredWords">
-   <!-- <a href="#" class="card-user-profile-button button hollow secondary">More Info</a>-->
+   <button  class="card-user-profile-button button hollow secondary" id="CopyButton" onclick="CopyToClipboard('preview')">Copy all text</a>
   </div>
 </div>
 </div>
@@ -216,7 +216,20 @@ jQuery(document).ready(function() {
     jQuery('#motiv').focus(counter);
 });
     
-    
+    function CopyToClipboard(containerid) {
+if (document.selection) { 
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("Copy"); 
+
+} else if (window.getSelection) {
+    var range = document.createRange();
+     range.selectNode(document.getElementById(containerid));
+     window.getSelection().addRange(range);
+     document.execCommand("Copy");
+     console.log("text copied");
+}}
     </script>
 </body>
 </html>
