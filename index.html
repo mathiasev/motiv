@@ -2,7 +2,7 @@
 <html>
 <head><title>Motiv - the motivational writer</title>
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
 <style>
   /* https://stackoverflow.com/a/27935448 */
@@ -63,7 +63,6 @@ input[type="number"] {
   -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
-  padding: 1rem;
   background: #e6e6e6;
   background: #fefefe;
   display: -webkit-flex;
@@ -154,6 +153,7 @@ background-color: rgb(255, 255, 255);
   </div>
 
   <script>
+    /* Markdown */
        function Editor(input, preview) {
         this.update = function () {
           preview.innerHTML = markdown.toHTML(input.value);
@@ -163,6 +163,30 @@ background-color: rgb(255, 255, 255);
       }
       var $ = function (id) { return document.getElementById(id); };
       new Editor($("motiv"), $("preview"));
+    
+    /*Word Count */
+    counter = function() {
+    var value = jQuery('#motiv').val();
+
+    if (value.length == 0) {
+        $('#WordCount').html(0);
+        return;
+    }
+
+    var regex = /\s+/gi;
+    var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+    jQuery('#WordCount').html(wordCount);
+};
+
+jQuery(document).ready(function() {
+    jQuery('#motiv').click(counter);
+    jQuery('#motiv').change(counter);
+    jQuery('#motiv').keydown(counter);
+    jQuery('#motiv').keypress(counter);
+    jQuery('#motiv').keyup(counter);
+    jQuery('#motiv').blur(counter);
+    jQuery('#motiv').focus(counter);
+});
     </script>
 </body>
 </html>
