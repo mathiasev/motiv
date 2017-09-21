@@ -3,7 +3,6 @@
 <head>
     <title>Motiv - the motivational writer</title>
     <link href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js">
@@ -12,13 +11,14 @@
     </script>
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <style>
-        h1 { color: #333333; font-family: 'Bitter', serif; font-size: 50px; font-weight: normal; line-height: 54px; margin: 0 0 54px; }
+        h1 { color: #333333; font-family: 'Bitter', serif; font-size: 30px; font-weight: normal; line-height: 54px; margin: 0 0 54px; }
+        h2 { color: #333333; font-family: 'Bitter', serif; font-size: 25px; font-weight: normal; line-height: 48px; margin: 0 0 54px; }
 
 
 p { color: #333333; font-family: Georgia, serif; font-size: 18px; line-height: 28px; margin: 0 0 28px; }
 
 
-p:first-of-type { font-size: 26px; line-height: 36px; margin: 0 0 28px; }
+p:first-of-type { font-size: 20px; line-height: 30px; margin: 0 0 28px; }
 
 
 a { color: #c73036; font-family: Georgia, serif; text-decoration: underline; }
@@ -181,7 +181,7 @@ a:hover { color: #333333; text-decoration: underline; }
                 var $ = function (id) { return document.getElementById(id); };
 
           var chartCanvas = $("myChart");
-        Chart.defaults.global.defaultFontFamily = "sans-serif";
+        Chart.defaults.global.defaultFontFamily = "Bitter";
         Chart.defaults.global.defaultFontSize = 18;
           Chart.defaults.global.legend.onClick = function(event, legendItem) {};
 
