@@ -145,8 +145,8 @@
             <div class="card-user-profile">
                 <div class="card-user-profile-content card-section">
                     <p class="card-user-profile-name"><input id="ProjectTitle" placeholder="Project Title" type="text"></p>
-                    <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
-                    <p class="card-user-profile-status"><span id="RemainingWordCount"></span> words remaining</p>
+                    <p class="card-user-profile-status"><span id="WordCount"></span></p>
+                    <p class="card-user-profile-status"><span id="RemainingWordCount"></span></p>
                     <p class="card-user-profile-info"></p>
                     <canvas height="400" id="myChart" width="400"></canvas>
                     <p></p>
@@ -174,7 +174,7 @@
               "Complete",
               "Remaining"
               ],
-            datasets: [ { data:[0,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
+            datasets: [ { data:[0,0], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
           
           var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData, options: { legend: { display: false }    } } );
           
@@ -201,11 +201,11 @@
 
           var regex = /\s+/gi;
           var wordCount = value.trim().replace(regex, ' ').split(' ').length;
-          jQuery('#WordCount').html(wordCount);
+          jQuery('#WordCount').html(wordCount + " words");
             doughnutChart.data.datasets[0].data[0] = wordCount;
             var remaining = jQuery('#RequiredWords').val()-wordCount;
             if(remaining > 0) {
-              jQuery('#RemainingWordCount').html(remaining);
+              jQuery('#RemainingWordCount').html(remaining + " words remaining");
             doughnutChart.data.datasets[0].data[1] = remaining;
             }
             doughnutChart.update();
