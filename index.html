@@ -160,8 +160,9 @@ background-color: rgb(255, 255, 255);
           var $ = function (id) { return document.getElementById(id); };
 
     var chartCanvas = $("myChart");
-Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontFamily = "sans-serif";
 Chart.defaults.global.defaultFontSize = 18;
+    Chats.degaults.global.legend.onCLicl =  onClick: function(event, legendItem) {};
 
     var chartData = {
       labels: [
