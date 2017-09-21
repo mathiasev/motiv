@@ -22,6 +22,7 @@
   box-shadow: none;
   overflow: hidden;
   color: #0a0a0a;
+  padding:10px;
 }
 
 .card-user-profile > :last-child {
@@ -116,6 +117,9 @@ background-color: rgb(255, 255, 255);
   #motiv {height: calc(30vh - 40px);}
   #preview {height: calc(70vh - 50px); margin-bottom:10px; padding:10px;}
   .row {  padding-top: 20px; }
+  
+  #ProjectTitle {font-size: 20px;
+    height: auto;}
 </style>
 </head>
 
@@ -124,14 +128,14 @@ background-color: rgb(255, 255, 255);
 <div class="medium-4 columns">
 <div class="card-user-profile">
   <div class="card-user-profile-content card-section">
-     <p class="card-user-profile-name"><input type="text" placeholder="Project Title"></p>
-    <p class="card-user-profile-status">Yeti Web Designer</p>
-    <p class="card-user-profile-info">The Yeti, once better known as the Abominable Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.</p>
+     <p class="card-user-profile-name"><input id="ProjectTitle" type="text" placeholder="Project Title"></p>
+    <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
+    <p class="card-user-profile-info"><code>Chart</code></p>
   </div>
 
   <div class="card-user-profile-actions">
-    <a href="#" class="card-user-profile-button button hollow">Follow</a>
-    <a href="#" class="card-user-profile-button button hollow secondary">More Info</a>
+    <input type="number" class="card-user-profile-button button hollow" placeholder="Required Words">
+   <!-- <a href="#" class="card-user-profile-button button hollow secondary">More Info</a>-->
   </div>
 </div>
 </div>
