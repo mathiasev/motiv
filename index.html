@@ -2,6 +2,8 @@
 <html>
 <head><title>Motiv - the motivational writer</title>
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
 <style>
 
 .card-user-profile {
@@ -126,9 +128,19 @@
 </div>
 </div>
 <div class="medium-8 columns">
-  <div style="width:100%; height:100vh; min-height:800px;" contenteditable="true"></div>
+  <div style="width:100%; height:100vh; min-height:800px;" contenteditable="true" id="motiv"></div>
   </div>
 
-
+  <script>
+      function Editor(motiv, motiv) {
+        this.update = function () {
+          motiv.innerHTML = markdown.toHTML(motiv.value);
+        };
+        motiv.editor = this;
+        this.update();
+      }
+      var $ = function (id) { return document.getElementById(id); };
+      new Editor($("#motiv"), $("#motiv"));
+    </script>
 </body>
 </html>
