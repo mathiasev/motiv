@@ -107,10 +107,11 @@
   opacity: 0.8;
 }
 
-#motiv {
+  body {background-color:#4c4c4c;}
+#motiv, #preview {
   width: 100%;
 min-height: 110px;
-height: calc(100vh - 40px);
+height: calc(50vh - 40px);
 background-color: rgb(255, 255, 255);
   }
   
@@ -135,6 +136,7 @@ background-color: rgb(255, 255, 255);
 </div>
 </div>
 <div class="medium-8 columns">
+  <div id="preview"></div>
   <div contenteditable="true" id="motiv"></div>
   </div>
 
@@ -147,7 +149,7 @@ background-color: rgb(255, 255, 255);
         this.update();
       }
       var $ = function (id) { return document.getElementById(id); };
-      new Editor($("motiv"), $("motiv"));
+      new Editor($("motiv"), $("preview"));
     </script>
 </body>
 </html>
