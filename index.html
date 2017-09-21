@@ -161,6 +161,7 @@
             <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
         </div>
         <script>
+            jQuery('#myChart').hide();
           /* Chart */
                 var $ = function (id) { return document.getElementById(id); };
 
@@ -194,11 +195,11 @@
           var value = jQuery('#motiv').val();
 
           if (value.length == 0) {
-              jQuery('#WordCount').html(0);
-              jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val());
+            jQuery('#myChart').hide();
+              jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val() + "words remaining");
               return;
           }
-
+jQuery('#myChart').hide();
           var regex = /\s+/gi;
           var wordCount = value.trim().replace(regex, ' ').split(' ').length;
           jQuery('#WordCount').html(wordCount + " words");
