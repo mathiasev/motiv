@@ -170,9 +170,12 @@ Chart.defaults.global.defaultFontSize = 18;
         "Complete",
         "Remaining"
         ],
-      datasets: [ { data:[10,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
+      datasets: [ { data:[0,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
     
-    var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData});
+    var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData, options: {
+         legend: {
+            display: false
+         }});
     
     
     /* Markdown */
