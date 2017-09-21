@@ -132,15 +132,15 @@
   </div>
 
   <script>
-      function Editor(motiv, motiv) {
+       function Editor(input, preview) {
         this.update = function () {
-          motiv.innerHTML = markdown.toHTML(motiv.value);
+          preview.innerHTML = markdown.toHTML(input.value);
         };
-        motiv.editor = this;
+        input.editor = this;
         this.update();
       }
       var $ = function (id) { return document.getElementById(id); };
-      new Editor($("#motiv"), $("#motiv"));
+      new Editor($(#motiv"), $("motiv"));
     </script>
 </body>
 </html>
