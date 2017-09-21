@@ -204,8 +204,10 @@
           jQuery('#WordCount').html(wordCount);
             doughnutChart.data.datasets[0].data[0] = wordCount;
             var remaining = jQuery('#RequiredWords').val()-wordCount;
-          jQuery('#RemainingWordCount').html(remaining);
+            if(remaining > 0) {
+              jQuery('#RemainingWordCount').html(remaining);
             doughnutChart.data.datasets[0].data[1] = remaining;
+            }
             doughnutChart.update();
             
         };
