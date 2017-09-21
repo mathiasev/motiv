@@ -137,7 +137,7 @@ background-color: rgb(255, 255, 255);
 </div>
 <div class="medium-8 columns">
   <div id="preview"></div>
-  <div contenteditable="true" id="motiv"></div>
+    <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
   </div>
 
   <script>
