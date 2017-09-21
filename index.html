@@ -1,238 +1,240 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head><title>Motiv - the motivational writer</title>
-<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-<style>
-  /* https://stackoverflow.com/a/27935448 */
-  input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
-.card-user-profile {
-  position: relative;
-  z-index: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-bottom: 1rem;
-  border: 0;
-  border-radius: 0;
-  background: #fefefe;
-  box-shadow: none;
-  overflow: hidden;
-  color: #0a0a0a;
-  padding:10px;
-}
-
-.card-user-profile > :last-child {
-  margin-bottom: 0;
-}
-
-.card-user-profile:hover .card-user-profile-img {
-  opacity: 1;
-}
-
-.card-user-profile-content {
-  position: relative;
-}
-
-.card-user-profile-content::before {
-  position: absolute;
-  content: '';
-  top: -3.4375rem;
-  left: -1.875rem;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 3.4375rem 0 0 31.25rem;
-  z-index: 0;
-  border-color: transparent transparent transparent #fefefe;
-}
-
-.card-user-profile-actions {
-  -webkit-flex: 0 1 auto;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
-  background: #e6e6e6;
-  background: #fefefe;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.card-user-profile-actions > :last-child {
-  margin-bottom: 0;
-}
-
-.card-user-profile-img {
-  max-width: 100%;
-  opacity: 0.85;
-  transition: all 0.25s ease;
-}
-
-.card-user-profile-avatar {
-  position: absolute;
-  bottom: 100%;
-  left: 1rem;
-  z-index: 2;
-  max-width: 5.625rem;
-}
-
-.card-user-profile-avatar img {
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
-}
-
-.card-user-profile-name {
-  margin-bottom: 0;
-  font-weight: 300;
-  font-size: 1.5rem;
-}
-
-.card-user-profile-button {
-  margin-bottom: 0;
-  -webkit-flex: 1 0 0;
-      -ms-flex: 1 0 0px;
-          flex: 1 0 0;
-}
-
-.card-user-profile-button + .card-user-profile-button {
-  margin-left: 1rem;
-}
-
-.card-user-profile-info {
-  font-size: 0.875rem;
-  letter-spacing: 1px;
-  opacity: 0.8;
-}
-
-  body {background-color:#4c4c4c;}
-#motiv, #preview {
-  width: 100%;
-min-height: 110px;
-background-color: rgb(255, 255, 255);
-  }
-  #motiv {height: calc(30vh - 40px);}
-  #preview {height: calc(70vh - 50px); margin-bottom:10px; padding:10px;overflow-y: auto;}
-  .row {  padding-top: 20px; }
-  
-  #ProjectTitle {font-size: 20px;
-    height: auto;}
-</style>
-</head>
-
-<body>
-  <div class="row">
-<div class="medium-4 columns">
-<div class="card-user-profile">
-  <div class="card-user-profile-content card-section">
-     <p class="card-user-profile-name"><input id="ProjectTitle" type="text" placeholder="Project Title"></p>
-    <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
-    <p class="card-user-profile-status"><span id="RemainingWordCount"></span> words remaining</p>
-    <p class="card-user-profile-info"><canvas id="myChart" width="400" height="400"></canvas>
-</p>
-  </div>
-
-  <div class="card-user-profile-actions">
-    <input type="number" class="card-user-profile-button button hollow" placeholder="Required Words" id="RequiredWords">
-   <button  class="card-user-profile-button button hollow secondary" id="CopyButton" onclick="CopyToClipboard('preview')">Copy all text</a>
-  </div>
-</div>
-</div>
-<div class="medium-8 columns">
-  <div id="preview"></div>
-    <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
-  </div>
-
-  <script>
-    /* Chart */
-          var $ = function (id) { return document.getElementById(id); };
-
-    var chartCanvas = $("myChart");
-Chart.defaults.global.defaultFontFamily = "sans-serif";
-Chart.defaults.global.defaultFontSize = 18;
-    Chart.defaults.global.legend.onClick = function(event, legendItem) {};
-
-    var chartData = {
-      labels: [
-        "Complete",
-        "Remaining"
-        ],
-      datasets: [ { data:[0,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
-    
-    var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData, options: {
-         legend: {
-            display: false
-         }});
-    
-    
-    /* Markdown */
-       function Editor(input, preview) {
-        this.update = function () {
-          preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
-      }
-      new Editor($("motiv"), $("preview"));
-    
-    /*Word Count */
-    counter = function() {
-    var value = jQuery('#motiv').val();
-
-    if (value.length == 0) {
-        jQuery('#WordCount').html(0);
-        jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val());
-        return;
+<head>
+    <title>Motiv - the motivational writer</title>
+    <link href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js">
+    </script>
+    <style>
+     /* https://stackoverflow.com/a/27935448 */
+     input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+       -webkit-appearance: none;
+       margin: 0;
+        cursor:text;
+    }
+    input[type="number"] {
+       -moz-appearance: textfield;
+        cursor:text;
     }
 
-    var regex = /\s+/gi;
-    var wordCount = value.trim().replace(regex, ' ').split(' ').length;
-    jQuery('#WordCount').html(wordCount);
-      doughnutChart.data.datasets[0].data[0] = wordCount;
-      var remaining = jQuery('#RequiredWords').val()-wordCount;
-    jQuery('#RemainingWordCount').html(remaining);
-      doughnutChart.data.datasets[0].data[1] = remaining;
-      doughnutChart.update();
-      
-};
+    .card-user-profile {
+     position: relative;
+     z-index: 0;
+     display: -webkit-flex;
+     display: -ms-flexbox;
+     display: flex;
+     -webkit-flex-direction: column;
+         -ms-flex-direction: column;
+             flex-direction: column;
+     margin-bottom: 1rem;
+     border: 0;
+     border-radius: 0;
+     background: #fefefe;
+     box-shadow: none;
+     overflow: hidden;
+     color: #0a0a0a;
+     padding:10px;
+    }
 
-jQuery(document).ready(function() {
-    jQuery('#motiv').click(counter);
-    jQuery('#motiv').change(counter);
-    jQuery('#motiv').keydown(counter);
-    jQuery('#motiv').keypress(counter);
-    jQuery('#motiv').keyup(counter);
-    jQuery('#motiv').blur(counter);
-    jQuery('#motiv').focus(counter);
-});
-    
-    function CopyToClipboard(containerid) {
-if (document.selection) { 
-    var range = document.body.createTextRange();
-    range.moveToElementText(document.getElementById(containerid));
-    range.select().createTextRange();
-    document.execCommand("Copy"); 
+    .card-user-profile > :last-child {
+     margin-bottom: 0;
+    }
 
-} else if (window.getSelection) {
-    var range = document.createRange();
-     range.selectNode(document.getElementById(containerid));
-     window.getSelection().addRange(range);
-     document.execCommand("Copy");
-     console.log("text copied");
-}}
-    </script>
+    .card-user-profile:hover .card-user-profile-img {
+     opacity: 1;
+    }
+
+    .card-user-profile-content {
+     position: relative;
+    }
+
+    .card-user-profile-content::before {
+     position: absolute;
+     content: '';
+     top: -3.4375rem;
+     left: -1.875rem;
+     width: 0;
+     height: 0;
+     border-style: solid;
+     border-width: 3.4375rem 0 0 31.25rem;
+     z-index: 0;
+     border-color: transparent transparent transparent #fefefe;
+    }
+
+    .card-user-profile-actions {
+     -webkit-flex: 0 1 auto;
+         -ms-flex: 0 1 auto;
+             flex: 0 1 auto;
+     background: #e6e6e6;
+     background: #fefefe;
+     display: -webkit-flex;
+     display: -ms-flexbox;
+     display: flex;
+    }
+
+    .card-user-profile-actions > :last-child {
+     margin-bottom: 0;
+    }
+
+    .card-user-profile-img {
+     max-width: 100%;
+     opacity: 0.85;
+     transition: all 0.25s ease;
+    }
+
+    .card-user-profile-avatar {
+     position: absolute;
+     bottom: 100%;
+     left: 1rem;
+     z-index: 2;
+     max-width: 5.625rem;
+    }
+
+    .card-user-profile-avatar img {
+     border-radius: 50%;
+     box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    }
+
+    .card-user-profile-name {
+     margin-bottom: 0;
+     font-weight: 300;
+     font-size: 1.5rem;
+    }
+
+    .card-user-profile-button {
+     margin-bottom: 0;
+     -webkit-flex: 1 0 0;
+         -ms-flex: 1 0 0px;
+             flex: 1 0 0;
+    }
+
+    .card-user-profile-button + .card-user-profile-button {
+     margin-left: 1rem;
+    }
+
+    .card-user-profile-info {
+     font-size: 0.875rem;
+     letter-spacing: 1px;
+     opacity: 0.8;
+    }
+
+     body {background-color:#4c4c4c;}
+    #motiv, #preview {
+     width: 100%;
+    min-height: 110px;
+    background-color: rgb(255, 255, 255);
+     }
+     #motiv {height: calc(30vh - 40px);}
+     #preview {height: calc(70vh - 50px); margin-bottom:10px; padding:10px;overflow-y: auto;}
+     .row {  padding-top: 20px; }
+     
+     #ProjectTitle {font-size: 20px;
+       height: auto;}
+        
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="medium-4 columns">
+            <div class="card-user-profile">
+                <div class="card-user-profile-content card-section">
+                    <p class="card-user-profile-name"><input id="ProjectTitle" placeholder="Project Title" type="text"></p>
+                    <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
+                    <p class="card-user-profile-status"><span id="RemainingWordCount"></span> words remaining</p>
+                    <p class="card-user-profile-info"></p>
+                    <canvas height="400" id="myChart" width="400"></canvas>
+                    <p></p>
+                </div>
+                <div class="card-user-profile-actions">
+                    <input class="card-user-profile-button button hollow input" id="RequiredWords" placeholder="Required Words" type="number"> <button class="card-user-profile-button button hollow secondary" id="CopyButton" onclick="CopyToClipboard('preview')">Copy all text</button>
+                </div>
+            </div>
+        </div>
+        <div class="medium-8 columns">
+            <div id="preview"></div>
+            <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
+        </div>
+        <script>
+          /* Chart */
+                var $ = function (id) { return document.getElementById(id); };
+
+          var chartCanvas = $("myChart");
+        Chart.defaults.global.defaultFontFamily = "sans-serif";
+        Chart.defaults.global.defaultFontSize = 18;
+          Chart.defaults.global.legend.onClick = function(event, legendItem) {};
+
+          var chartData = {
+            labels: [
+              "Complete",
+              "Remaining"
+              ],
+            datasets: [ { data:[0,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
+          
+          var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData, options: { legend: { display: false }    } } );
+          
+          
+          /* Markdown */
+             function Editor(input, preview) {
+              this.update = function () {
+                preview.innerHTML = markdown.toHTML(input.value);
+              };
+              input.editor = this;
+              this.update();
+            }
+            new Editor($("motiv"), $("preview"));
+          
+          /*Word Count */
+          counter = function() {
+          var value = jQuery('#motiv').val();
+
+          if (value.length == 0) {
+              jQuery('#WordCount').html(0);
+              jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val());
+              return;
+          }
+
+          var regex = /\s+/gi;
+          var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+          jQuery('#WordCount').html(wordCount);
+            doughnutChart.data.datasets[0].data[0] = wordCount;
+            var remaining = jQuery('#RequiredWords').val()-wordCount;
+          jQuery('#RemainingWordCount').html(remaining);
+            doughnutChart.data.datasets[0].data[1] = remaining;
+            doughnutChart.update();
+            
+        };
+
+        jQuery(document).ready(function() {
+          jQuery('#motiv').click(counter);
+          jQuery('#motiv').change(counter);
+          jQuery('#motiv').keydown(counter);
+          jQuery('#motiv').keypress(counter);
+          jQuery('#motiv').keyup(counter);
+          jQuery('#motiv').blur(counter);
+          jQuery('#motiv').focus(counter);
+        });
+          
+          function CopyToClipboard(containerid) {
+        if (document.selection) { 
+          var range = document.body.createTextRange();
+          range.moveToElementText(document.getElementById(containerid));
+          range.select().createTextRange();
+          document.execCommand("Copy"); 
+
+        } else if (window.getSelection) {
+          var range = document.createRange();
+           range.selectNode(document.getElementById(containerid));
+           window.getSelection().addRange(range);
+           document.execCommand("Copy");
+           console.log("text copied");
+        }}
+        </script>
+    </div>
 </body>
 </html>
