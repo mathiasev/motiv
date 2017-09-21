@@ -156,6 +156,21 @@ background-color: rgb(255, 255, 255);
   </div>
 
   <script>
+    /* Chart */
+    var chartCanvas = $("myChart");
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+    var chartData = {
+      labels: [
+        "Complete",
+        "Remaining"
+        ],
+      datasets: [ { data:[10,100], backgroundColor: ["#b4ecb4", "#D3D3D3"]}] };
+    
+    var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData});
+    
+    
     /* Markdown */
        function Editor(input, preview) {
         this.update = function () {
@@ -180,7 +195,12 @@ background-color: rgb(255, 255, 255);
     var regex = /\s+/gi;
     var wordCount = value.trim().replace(regex, ' ').split(' ').length;
     jQuery('#WordCount').html(wordCount);
-    jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val()-wordCount);
+      doughnutChart.data.datasets[0].data[0] = wordCount;
+      var remaining = jQuery('#RequiredWords').val()-wordCount;
+    jQuery('#RemainingWordCount').html(remaining);
+      doughnutChart.data.datasets[0].data[1] = remaining;
+      doughnutChart.update();
+      
 };
 
 jQuery(document).ready(function() {
@@ -193,19 +213,7 @@ jQuery(document).ready(function() {
     jQuery('#motiv').focus(counter);
 });
     
-    /* Chart */
-    var chartCanvas = $("myChart");
-Chart.defaults.global.defaultFontFamily = "Lato";
-Chart.defaults.global.defaultFontSize = 18;
-
-    var chartData = {
-      labels: [
-        "Complete",
-        "Remaining"
-        ],
-      datasets: [ { data:[10,100]}] };
     
-    var doughnutChart = new Chart(chartCanvas, {type:'doughnut', data: chartData});
     </script>
 </body>
 </html>
