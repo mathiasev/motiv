@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js" integrity="sha256-OHkZxrR7EXZQ8MlUC+Ww2+RedaJSP6DEsAukSt023dU=" crossorigin="anonymous"></script>
 <style>
   /* https://stackoverflow.com/a/27935448 */
   input[type="number"]::-webkit-outer-spin-button,
@@ -139,7 +140,8 @@ background-color: rgb(255, 255, 255);
      <p class="card-user-profile-name"><input id="ProjectTitle" type="text" placeholder="Project Title"></p>
     <p class="card-user-profile-status"><span id="WordCount"></span> words</p>
     <p class="card-user-profile-status"><span id="RemainingWordCount"></span> words remaining</p>
-    <p class="card-user-profile-info"><code>Chart</code></p>
+    <p class="card-user-profile-info"><canvas id="myChart" width="400" height="400"></canvas>
+</p>
   </div>
 
   <div class="card-user-profile-actions">
@@ -189,6 +191,31 @@ jQuery(document).ready(function() {
     jQuery('#motiv').keyup(counter);
     jQuery('#motiv').blur(counter);
     jQuery('#motiv').focus(counter);
+});
+    
+    /* Chart */
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var data = {
+    datasets: [{
+        data: [0, 100]
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        'Red',
+        'Yellow',
+        'Blue'
+    ]
+
+};
+      
+      var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data
+    },
+    options: {
+        }
+    }
 });
     </script>
 </body>
