@@ -157,6 +157,8 @@ background-color: rgb(255, 255, 255);
 
   <script>
     /* Chart */
+          var $ = function (id) { return document.getElementById(id); };
+
     var chartCanvas = $("myChart");
 Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 18;
@@ -179,7 +181,6 @@ Chart.defaults.global.defaultFontSize = 18;
         input.editor = this;
         this.update();
       }
-      var $ = function (id) { return document.getElementById(id); };
       new Editor($("motiv"), $("preview"));
     
     /*Word Count */
