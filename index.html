@@ -215,7 +215,7 @@
             <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
         </div>
         <script>
-            jQuery(function(){var texted = getCookie("editor");$("motiv").text(texted);});
+            jQuery(function(){var texted = getCookie("editor") ? getCookie("editor"): '';$("motiv").val(texted);});
             jQuery(document).foundation();
             jQuery('#myChart').hide();
             /* Chart */
