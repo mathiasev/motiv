@@ -212,11 +212,11 @@
             </div>
             <textarea id="question" placeholder="What's the question?"></textarea>
            
-            <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
+            
         </div>
         <script>
         
-var simplemde = new SimpleMDE();
+var simplemde = new SimpleMDE({autosave:{enabled: true,uniqueId:'editor'}, autofocus:true});
             jQuery(document).foundation();
             jQuery('#myChart').hide();
             /* Chart */
