@@ -14,6 +14,9 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
     <style>
         /* latin-ext */
         @font-face {
@@ -208,11 +211,12 @@
                 <p>If you close, refresh, or look at this page funny, you will probably loose your work. You have been warned.</p><button aria-label="Dismiss alert" class="close-button" data-close="" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <textarea id="question" placeholder="What's the question?"></textarea>
-            <div id="preview"></div>
+           
             <textarea id="motiv" oninput="this.editor.update()" placeholder="Write here"></textarea>
         </div>
         <script>
-            jQuery(function(){var texted = getCookie("editor") ? getCookie("editor"): '';jQuery(".motiv").text(texted);});
+        
+var simplemde = new SimpleMDE();
             jQuery(document).foundation();
             jQuery('#myChart').hide();
             /* Chart */
@@ -234,15 +238,7 @@
 
 
             /* Markdown */
-             function Editor(input, preview) {
-              this.update = function () {
-                preview.innerHTML = markdown.toHTML(input.value);
-                setCookie("editor", input.value);
-              };
-              input.editor = this;
-              this.update();
-            }
-            new Editor($("motiv"), $("preview"));
+            
 
             /*Word Count */
             counter = function() {
@@ -279,39 +275,7 @@
 
             new Clipboard('#CopyButton');
                  
-            function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function checkCookie() {
-    var user = getCookie("username");
-    if (user != "") {
-        alert("Welcome again " + user);
-    } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-            setCookie("username", user, 365);
-        }
-    }
-}
+      
         </script>
     </div>
 </body>
