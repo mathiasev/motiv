@@ -244,16 +244,16 @@ var simplemde = new SimpleMDE({autosave:{enabled: true,uniqueId:'editor'}, autof
 
             /*Word Count */
             counter = function() {
-            var value = simplemde.value();
-
+var value = parseInt(jQuery('span.words').text());
+		    
             if (value.length == 0) {
             jQuery('#myChart').hide();
               /*jQuery('#RemainingWordCount').html(jQuery('#RequiredWords').val() + "words remaining");*/
               return;
             }
             jQuery('#myChart').show();
-            var regex = /\s+/gi;
-            var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+            
+            var wordCount =  parseInt(jQuery('span.words').text());
             jQuery('#WordCount').html(wordCount + " words");
             doughnutChart.data.datasets[0].data[0] = wordCount;
             var remaining = jQuery('#RequiredWords').val()-wordCount;
