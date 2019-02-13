@@ -244,7 +244,7 @@ var simplemde = new SimpleMDE({autosave:{enabled: true,uniqueId:'editor'}, autof
 
             /*Word Count */
             counter = function() {
-            var value = jQuery('#motiv').val();
+            var value = simplemde.value();
 
             if (value.length == 0) {
             jQuery('#myChart').hide();
@@ -265,15 +265,9 @@ var simplemde = new SimpleMDE({autosave:{enabled: true,uniqueId:'editor'}, autof
 
             };
 
-            jQuery(document).ready(function() {
-            jQuery('#motiv').click(counter);
-            jQuery('#motiv').change(counter);
-            jQuery('#motiv').keydown(counter);
-            jQuery('#motiv').keypress(counter);
-            jQuery('#motiv').keyup(counter);
-            jQuery('#motiv').blur(counter);
-            jQuery('#motiv').focus(counter);
-            });
+           simplemde.codemirror.on("change", function(){
+	counter();
+});
 
             new Clipboard('#CopyButton');
                  
